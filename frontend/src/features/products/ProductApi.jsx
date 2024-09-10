@@ -1,13 +1,18 @@
 import { axiosi } from "../../config/axios";
 
+const environment = {
+    apiurl: "http://localhost:8000"
+}
+
 export const addProduct=async(data)=>{
     try {
-        const res=await axiosi.post('/products',data)
+        const res=await axiosi.post(`${environment.apiurl}/products`,data)
         return res.data
     } catch (error) {
         throw error.response.data
     }
 }
+
 export const fetchProducts=async(filters)=>{
 
     let queryString=''
@@ -36,7 +41,7 @@ export const fetchProducts=async(filters)=>{
     }
     
     try {
-        const res=await axiosi.get(`/products?${queryString}`)
+        const res=await axiosi.get(`${environment.apiurl}/products?${queryString}`)
         const totalResults=await res.headers.get("X-Total-Count")
         return {data:res.data,totalResults:totalResults}
     } catch (error) {
@@ -45,7 +50,7 @@ export const fetchProducts=async(filters)=>{
 }
 export const fetchProductById=async(id)=>{
     try {
-        const res=await axiosi.get(`/products/${id}`)
+        const res=await axiosi.get(`${environment.apiurl}/products/${id}`)
         return res.data
     } catch (error) {
         throw error.response.data
@@ -53,7 +58,7 @@ export const fetchProductById=async(id)=>{
 }
 export const updateProductById=async(update)=>{
     try {
-        const res=await axiosi.patch(`/products/${update._id}`,update)
+        const res=await axiosi.patch(`${environment.apiurl}/products/${update._id}`,update)
         return res.data
     } catch (error) {
         throw error.response.data
@@ -61,7 +66,7 @@ export const updateProductById=async(update)=>{
 }
 export const undeleteProductById=async(id)=>{
     try {
-        const res=await axiosi.patch(`/products/undelete/${id}`)
+        const res=await axiosi.patch(`${environment.apiurl}/products/undelete/${id}`)
         return res.data
     } catch (error) {
         throw error.response.data
@@ -69,7 +74,7 @@ export const undeleteProductById=async(id)=>{
 }
 export const deleteProductById=async(id)=>{
     try {
-        const res=await axiosi.delete(`/products/${id}`)
+        const res=await axiosi.delete(`${environment.apiurl}/products/${id}`)
         return res.data
     } catch (error) {
         throw error.response.data

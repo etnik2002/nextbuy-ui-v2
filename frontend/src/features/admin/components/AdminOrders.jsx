@@ -132,7 +132,7 @@ export const AdminOrders = () => {
                         <Typography>{order.address[0].postalCode}</Typography>
                       </Stack>
                     </TableCell>
-                    <TableCell align="right">{order.paymentMode}</TableCell>
+                    <TableCell align="right">{order.paymentMode == "COD" ? "CASH" : order.paymentMode}</TableCell>
                     <TableCell align="right">{new Date(order.createdAt).toDateString()}</TableCell>
 
                     {/* order status */}

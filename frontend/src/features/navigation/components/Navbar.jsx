@@ -36,6 +36,7 @@ export const Navbar=({isProductList=false})=> {
   const isProductFilterOpen=useSelector(selectProductIsFilterOpen)
 
   const handleOpenUserMenu = (event) => {
+    console.log({event})
     setAnchorElUser(event.currentTarget);
   };
 
@@ -59,7 +60,7 @@ export const Navbar=({isProductList=false})=> {
         <Toolbar sx={{p:1,height:"4rem",display:"flex",justifyContent:"space-around"}}>
 
           <Typography variant="h6" noWrap component="a" href="/" sx={{ mr: 2, display: { xs: 'none', md: 'flex' },fontWeight: 700, letterSpacing: '.3rem', color: 'inherit', textDecoration: 'none', }}>
-            MERN SHOP
+            Next Buy
           </Typography>
 
 
@@ -95,9 +96,9 @@ export const Navbar=({isProductList=false})=> {
                 </MenuItem>
               
               }
-              {settings.map((setting) => (
+              {settings?.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography component={Link} color={'text.primary'} sx={{textDecoration:"none"}} to={setting.to} textAlign="center">{setting.name}</Typography>
+                  <Typography component={Link} color={'text.primary'} sx={{textDecoration:"none"}} to={setting.to} textAlign="center">{setting?.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>

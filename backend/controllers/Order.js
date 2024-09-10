@@ -35,7 +35,7 @@ exports.getAll = async (req, res) => {
         }
 
         const totalDocs=await Order.find({}).countDocuments().exec()
-        const results=await Order.find({}).skip(skip).limit(limit).exec()
+        const results=await Order.find({}).sort({createdAt: "desc"}).skip(skip).limit(limit).exec()
 
         res.header("X-Total-Count",totalDocs)
         res.status(200).json(results)

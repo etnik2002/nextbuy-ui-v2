@@ -7,47 +7,54 @@ const { sanitizeUser } = require("../utils/SanitizeUser");
 const { generateToken } = require("../utils/GenerateToken");
 const PasswordResetToken = require("../models/PasswordResetToken");
 
-exports.signup=async(req,res)=>{
+exports.signup = async (req, res) => {
     try {
-        const existingUser=await User.findOne({email:req.body.email})
+        const { name, email, password } = req.body;
+
+        console.log('Received signup data:', { name, email, password: '***' });
+
+        const existingUser = await User.findOne({ email });
+        console.log({ existingUser });
         
-        // if user already exists
-        if(existingUser){
-            return res.status(400).json({"message":"User already exists"})
+        if (existingUser) {
+            return res.status(400).json({ "message": "User already exists" });
         }
 
-        // hashing the password
-        const hashedPassword=await bcrypt.hash(req.body.password,10)
-        req.body.password=hashedPassword
+        const hashedPassword = await bcrypt.hash(password, 10);
+        console.log({ hashedPassword });
 
-        // creating new user
-        const createdUser=new User(req.body)
-        await createdUser.save()
+        const createdUser = new User({
+            name,
+            email,
+            password: hashedPassword,
+            isVerified: false,  // Set default value
+            isAdmin: false      // Always set to false for new signups
+        });
+        console.log({ createdUser });
+        await createdUser.save();
 
-        // getting secure user info
-        const secureInfo=sanitizeUser(createdUser)
+        const secureInfo = sanitizeUser(createdUser);
+        const token = generateToken(secureInfo);
+        console.log({ secureInfo, token });
 
-        // generating jwt token
-        const token=generateToken(secureInfo)
+        res.cookie('token', token, {
+            sameSite: process.env.PRODUCTION === 'true' ? "None" : 'Lax',
+            maxAge: new Date(Date.now() + (parseInt(process.env.COOKIE_EXPIRATION_DAYS * 24 * 60 * 60 * 1000))),
+            httpOnly: true,
+            secure: process.env.PRODUCTION === 'true' ? true : false
+        });
 
-        // sending jwt token in the response cookies
-        res.cookie('token',token,{
-            sameSite:process.env.PRODUCTION==='true'?"None":'Lax',
-            maxAge:new Date(Date.now() + (parseInt(process.env.COOKIE_EXPIRATION_DAYS * 24 * 60 * 60 * 1000))),
-            httpOnly:true,
-            secure:process.env.PRODUCTION==='true'?true:false
-        })
-
-        res.status(201).json(sanitizeUser(createdUser))
+        res.status(201).json(sanitizeUser(createdUser));
 
     } catch (error) {
-        console.log(error);
-        res.status(500).json({message:"Error occured during signup, please try again later"})
+        console.log({ error });
+        res.status(500).json({ message: "Error occurred during signup, please try again later" });
     }
-}
+};
 
 exports.login=async(req,res)=>{
     try {
+        console.log("heere")
         // checking if user exists or not
         const existingUser=await User.findOne({email:req.body.email})
 

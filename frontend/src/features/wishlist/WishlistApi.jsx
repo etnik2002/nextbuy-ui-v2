@@ -1,8 +1,12 @@
 import {axiosi} from '../../config/axios'
 
+const environment = {
+    apiurl: "http://localhost:8000"
+}
+
 export const createWishlistItem=async(data)=>{
     try {
-        const res=await axiosi.post("/wishlist",data)
+        const res=await axiosi.post(`${environment.apiurl}/wishlist`,data)
         return res.data
     } catch (error) {
         throw error.response.data
@@ -11,7 +15,7 @@ export const createWishlistItem=async(data)=>{
 
 export const fetchWishlistByUserId=async(id)=>{
     try {
-        const res=await axiosi.get(`/wishlist/user/${id}`)
+        const res=await axiosi.get(`${environment.apiurl}/wishlist/user/${id}`)
         const totalResults=await res.headers.get("X-Total-Count")
         return {data:res.data,totalResults:totalResults}
     } catch (error) {
@@ -21,7 +25,7 @@ export const fetchWishlistByUserId=async(id)=>{
 
 export const updateWishlistItemById=async(update)=>{
     try {
-        const res=await axiosi.patch(`/wishlist/${update._id}`,update)
+        const res=await axiosi.patch(`${environment.apiurl}/wishlist/${update._id}`,update)
         return res.data
     } catch (error) {
         throw error.response.data
@@ -30,7 +34,7 @@ export const updateWishlistItemById=async(update)=>{
 
 export const deleteWishlistItemById=async(id)=>{
     try {
-        const res=await axiosi.delete(`/wishlist/${id}`)
+        const res=await axiosi.delete(`${environment.apiurl}/wishlist/${id}`)
         return res.data
     } catch (error) {
         throw error.response.data

@@ -16,20 +16,16 @@ const wishlistRoutes=require("./routes/Wishlist")
 const { connectToDB } = require("./database/db")
 
 
-// server init
 const server=express()
 
-// database connection
 connectToDB()
 
 
-// middlewares
 server.use(cors({origin:process.env.ORIGIN,credentials:true,exposedHeaders:['X-Total-Count'],methods:['GET','POST','PATCH','DELETE']}))
 server.use(express.json())
 server.use(cookieParser())
 server.use(morgan("tiny"))
 
-// routeMiddleware
 server.use("/auth",authRoutes)
 server.use("/users",userRoutes)
 server.use("/products",productRoutes)

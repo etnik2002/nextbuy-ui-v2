@@ -21,7 +21,6 @@ export const Footer = () => {
   return (
     <Stack sx={{backgroundColor:theme.palette.primary.main,paddingTop:"3rem",paddingLeft:is700?"1rem":"3rem",paddingRight:is700?"1rem":"3rem",paddingBottom:"1.5rem",rowGap:"5rem",color:theme.palette.primary.light,justifyContent:"space-around"}}>
 
-            {/* upper */}
             <Stack flexDirection={'row'} rowGap={'1rem'} justifyContent={is700?"":'space-around'} flexWrap={'wrap'}>
 
                 <Stack rowGap={'1rem'} padding={'1rem'}>
@@ -33,9 +32,9 @@ export const Footer = () => {
 
                 <Stack rowGap={'1rem'} padding={'1rem'}>
                     <Typography variant='h6'>Support</Typography>
-                    <Typography sx={labelStyles}>11th Main Street, Dhaka,  DH 1515, California.</Typography>
-                    <Typography sx={labelStyles}>exclusive@gmail.com</Typography>
-                    <Typography sx={labelStyles}>+88015-88888-9999</Typography>
+                    <Typography sx={labelStyles}>Ilindenska n.335 1200 Tetovo.</Typography>
+                    <Typography sx={labelStyles}>nextbuy@gmail.com</Typography>
+                    <Typography sx={labelStyles}>+389 76 224 065</Typography>
                 </Stack>
 
                 <Stack rowGap={'1rem'} padding={'1rem'}>
@@ -86,9 +85,8 @@ export const Footer = () => {
 
             </Stack>
 
-            {/* lower */}
             <Stack alignSelf={"center"}>
-                <Typography color={'GrayText'}>&copy; Mern Store {new Date().getFullYear()}. All right reserved</Typography>
+                <Typography color={'GrayText'}>&copy; Next buy Store {new Date().getFullYear()}. All right reserved</Typography>
             </Stack>
 
     </Stack>
