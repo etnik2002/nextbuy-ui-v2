@@ -135,7 +135,6 @@ export const AddProduct = () => {
 
             </Stack>
 
-            {/* action area */}
             <Stack flexDirection={'row'} alignSelf={'flex-end'} columnGap={is480?1:2}>
                 <Button size={is480?'medium':'large'} variant='contained' type='submit'>Add Product</Button>
                 <Button size={is480?'medium':'large'} variant='outlined' color='error' component={Link} to={'/admin/dashboard'}>Cancel</Button>

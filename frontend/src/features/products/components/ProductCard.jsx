@@ -11,7 +11,7 @@ import { addToCartAsync,selectCartItems } from '../../cart/CartSlice';
 import {motion} from 'framer-motion'
 
 export const ProductCard = ({id,title,price,thumbnail,brand,stockQuantity,handleAddRemoveFromWishlist,isWishlistCard,isAdminCard}) => {
-
+    console.log({PC: "HERE GEBIST"})
 
     const navigate=useNavigate()
     const wishlistItems=useSelector(selectWishlistItems)

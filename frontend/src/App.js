@@ -66,13 +66,13 @@ function App() {
           ):(
             // user routes
             <>
-            <Route exact path='/' element={<Protected><HomePage/></Protected>}/>
-            <Route exact path='/cart' element={<Protected><CartPage/></Protected>}/>
+            <Route exact path='/' element={<HomePage/>}/>
+            <Route exact path='/cart' element={<CartPage/>}/>
             <Route exact path='/profile' element={<Protected><UserProfilePage/></Protected>}/>
-            <Route exact path='/checkout' element={<Protected><CheckoutPage/></Protected>}/>
-            <Route exact path='/order-success/:id' element={<Protected><OrderSuccessPage/></Protected>}/>
-            <Route exact path='/orders' element={<Protected><UserOrdersPage/></Protected>}/>
-            <Route exact path='/wishlist' element={<Protected><WishlistPage/></Protected>}/>
+            <Route exact path='/checkout' element={<CheckoutPage/>}/>
+            <Route exact path='/order-success/:id' element={<OrderSuccessPage/>}/>
+            <Route exact path='/orders' element={<UserOrdersPage/>}/>
+            <Route exact path='/wishlist' element={<WishlistPage/>}/>
             <Route exact path='*' element={<NotFoundPage/>}/>
             </>
           )

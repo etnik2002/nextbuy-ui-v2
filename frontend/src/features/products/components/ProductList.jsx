@@ -34,6 +34,7 @@ const sortOptions=[
 const bannerImages=[banner1,banner3,banner2,banner4]
 
 export const ProductList = () => {
+    console.log("produktallno list")
     const [filters,setFilters]=useState({})
     const [page,setPage]=useState(1)
     const [sort,setSort]=useState(null)
